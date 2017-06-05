@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TerraTex_GT_MP_ServerControl" GeneratedClassName="app">
+  <Profiles />
+  <Settings>
+    <Setting Name="live_timeuntilrestart" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="dev_timeuntilrestart" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="live_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Please Select ...</Value>
+    </Setting>
+    <Setting Name="dev_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Please Select ...</Value>
+    </Setting>
+    <Setting Name="live_autorestart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="dev_autorestart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="jenkinsUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="jenkinsPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>
