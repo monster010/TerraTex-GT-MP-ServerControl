@@ -57,6 +57,10 @@ namespace TerraTex_GT_MP_ServerControl
             Program.Worker = new CheckProcess(this);
             Program.WorkerThread = new Thread(Program.Worker.DoWork);
             Program.WorkerThread.Start();
+
+            CheckSocket cs = new CheckSocket(this);
+            Thread csTh = new Thread(cs.DoWork);
+            csTh.Start();
         }
 
         private void selectDevServerPath_Click(object sender, EventArgs e)
@@ -113,6 +117,16 @@ namespace TerraTex_GT_MP_ServerControl
                 SetControlPropertyThreadSafe(devServerStatus, "Text", "Waiting for Jenkins to finish Deployment");
                 SetControlPropertyThreadSafe(devServerStatus, "ForeColor", Color.Orange);
             }
+        }
+
+        public bool GetLiveStatus()
+        {
+            return liveServerStatus.ForeColor == Color.Green;
+        }
+
+        public bool GetDevStatus()
+        {
+            return devServerStatus.ForeColor == Color.Green;
         }
 
         public void SetLiveServerStatus(int statusId, int seconds)
