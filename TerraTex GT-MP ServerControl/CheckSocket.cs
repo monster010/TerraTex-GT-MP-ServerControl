@@ -11,7 +11,9 @@ namespace TerraTex_GT_MP_ServerControl
     class CheckSocket
     {
         private Form1 _form;
-        
+        private volatile bool _shouldStop;
+
+
         public CheckSocket(Form1 form)
         {
             _form = form;
@@ -25,14 +27,18 @@ namespace TerraTex_GT_MP_ServerControl
             TcpClient clientSocket = serverSocket.AcceptTcpClient();
             serverSocket.Start();
 
-            while (true)
+            while (true && !_shouldStop)
             {
                 try
                 {
                     NetworkStream networkStream = clientSocket.GetStream();
                     if (networkStream.DataAvailable)
                     {
-                        networkStream.Read(new byte[10025], 0, 1);
+                        
+                        while (networkStream.DataAvailable)
+                        {
+                            networkStream.Read(new byte[10025], 0, 1);
+                        }
                         string serverResponse = "{\"4499\": ";
                         serverResponse += _form.GetLiveStatus();
                         serverResponse += ", \"4599\": ";
@@ -50,6 +56,10 @@ namespace TerraTex_GT_MP_ServerControl
                     Console.WriteLine(ex.ToString());
                 }
             }
+        }
+        public void RequestStop()
+        {
+            _shouldStop = true;
         }
 
     }

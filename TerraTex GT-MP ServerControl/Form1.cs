@@ -58,9 +58,9 @@ namespace TerraTex_GT_MP_ServerControl
             Program.WorkerThread = new Thread(Program.Worker.DoWork);
             Program.WorkerThread.Start();
 
-            CheckSocket cs = new CheckSocket(this);
-            Thread csTh = new Thread(cs.DoWork);
-            csTh.Start();
+            Program.CheckSocket = new CheckSocket(this);
+            Program.CheckSocketThread = new Thread(Program.CheckSocket.DoWork);
+            Program.CheckSocketThread.Start();
         }
 
         private void selectDevServerPath_Click(object sender, EventArgs e)
@@ -186,6 +186,7 @@ namespace TerraTex_GT_MP_ServerControl
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.Worker.RequestStop();
+            Program.CheckSocket.RequestStop();
         }
     }
 }
