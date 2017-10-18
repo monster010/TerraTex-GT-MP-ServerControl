@@ -21,6 +21,7 @@ namespace TerraTex_GT_MP_ServerControl
         {
 
             TcpListener serverSocket = new TcpListener(IPAddress.Any, 11000);
+            serverSocket.Start();
             TcpClient clientSocket = serverSocket.AcceptTcpClient();
             serverSocket.Start();
 
