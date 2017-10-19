@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using TinyWebServer;
 
 namespace TerraTex_GT_MP_ServerControl
 {
@@ -58,9 +63,30 @@ namespace TerraTex_GT_MP_ServerControl
             Program.WorkerThread = new Thread(Program.Worker.DoWork);
             Program.WorkerThread.Start();
 
-            Program.CheckSocket = new CheckSocket(this);
-            Program.CheckSocketThread = new Thread(Program.CheckSocket.DoWork);
-            Program.CheckSocketThread.Start();
+            Program.ws = new WebServer(request =>
+            {
+                Dictionary<int,bool> status = new Dictionary<int, bool>();
+                if (devServerStatus.ForeColor == Color.Green)
+                {
+                    status.Add(4599, true);
+                }
+                else
+                {
+                    status.Add(4599, false);
+                }
+                if (liveServerStatus.ForeColor == Color.Green)
+                {
+                    status.Add(4499, true);
+                }
+                else
+                {
+                    status.Add(4499, false);
+                }
+                return JObject.FromObject(status).ToString();
+
+
+            }, "http://localhost:11000/", "http://terratex.eu:11000/");
+            Program.ws.Run();
         }
 
         private void selectDevServerPath_Click(object sender, EventArgs e)
@@ -186,7 +212,9 @@ namespace TerraTex_GT_MP_ServerControl
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.Worker.RequestStop();
-            Program.CheckSocket.RequestStop();
+            Program.ws.Stop();
+            
+           
         }
     }
 }

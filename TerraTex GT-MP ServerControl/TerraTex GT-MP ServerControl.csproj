@@ -50,6 +50,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="TinyWebServer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TinyWebServer.dll.1.0.1\lib\net40\TinyWebServer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="app.cs" />
@@ -59,7 +62,6 @@
       <DependentUpon>app.settings</DependentUpon>
     </Compile>
     <Compile Include="checkProcess.cs" />
-    <Compile Include="CheckSocket.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
