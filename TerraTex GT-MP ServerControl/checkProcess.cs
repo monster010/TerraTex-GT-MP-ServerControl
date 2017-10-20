@@ -146,7 +146,7 @@ namespace TerraTex_GT_MP_ServerControl
             // Path 2: http://build.terratex.eu:8080/job/TerraTex-Community/job/GT-MP-Reallife-RPG-Script/job/develop/{latestBuildId}/api/json
             // 3.: building: false && result: SUCCESS
 
-            WebRequest request = WebRequest.Create("http://build.terratex.eu:8080/job/TerraTex-Community/job/GT-MP-Reallife-RPG-Script/job/" + branch + "/api/json");
+            WebRequest request = WebRequest.Create("http://build.terratex.eu:8080/job/GT-MP-Reallife-RPG-Script/job/" + branch + "/api/json");
             WebResponse response = request.GetResponse();
             Stream dataStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(dataStream);
